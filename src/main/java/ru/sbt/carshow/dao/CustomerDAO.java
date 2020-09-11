@@ -1,4 +1,15 @@
 package ru.sbt.carshow.dao;
 
-public class CustomerDAO {
+import ru.sbt.carshow.model.Customer;
+
+import java.util.List;
+
+public interface CustomerDAO {
+    List<Customer> getAll();
+    Customer getById(long id);
+    long add(Customer customer);
+    void delete(Customer customer);
+    void edit(Customer customer);
+    int count();
+    int clear();
 }
