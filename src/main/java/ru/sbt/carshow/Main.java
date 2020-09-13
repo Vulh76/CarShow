@@ -15,15 +15,14 @@ public class Main {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
 
         CustomerService customerService = applicationContext.getBean(CustomerService.class);
-        customerService.add(new Customer("Андрей", "Иванов", new Date("25.03.1976")));
-        customerService.add(new Customer("Илья", "Думаченко",  new Date("25.03.1976")));
-        customerService.add(new Customer("Наталья", "Синичкина",  new Date("25.03.1976")));
-        customerService.add(new Customer("Владимир", "Орлов",  new Date("25.03.1976")));
-        customerService.add(new Customer("Елизавета", "Котова",  new Date("25.03.1976")));
-        customerService.add(new Customer("Оксана", "Саратова",  new Date("25.03.1976")));
-        customerService.add(new Customer("Александр", "Вертушкин",  new Date("25.03.1976")));
-        customerService.add(new Customer("Сергей", "Захаров",  new Date("25.03.1976")));
-        customerService.add(new Customer("Виктория", "Соколова",  new Date("25.03.1976")));
+        customerService.add(new Customer("Андрей", "Иванов", new Date()));
+        customerService.add(new Customer("Илья", "Думаченко",  new Date()));
+        customerService.add(new Customer("Наталья", "Синичкина",  new Date()));
+        customerService.add(new Customer("Владимир", "Орлов",  new Date()));
+        customerService.add(new Customer("Елизавета", "Котова",  new Date()));
+        customerService.add(new Customer("Оксана", "Саратова",  new Date()));
+        customerService.add(new Customer("Александр", "Вертушкин",  new Date()));
+        customerService.add(new Customer("Виктория", "Соколова",  new Date()));
 
         CarService carService = applicationContext.getBean(CarService.class);
         carService.add(new Car("Mercedes", "35 AMG 4MATIC", "Black", 3500000));
