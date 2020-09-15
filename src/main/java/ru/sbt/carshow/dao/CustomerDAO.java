@@ -9,7 +9,7 @@ public interface CustomerDAO {
     Customer getById(long id);
     long add(Customer customer);
     void delete(Customer customer);
-    void edit(Customer customer);
+    void update(Customer customer);
     int count();
     int clear();
 }

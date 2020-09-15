@@ -9,24 +9,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "sbt.orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
-    @Column(name = "cust_id")
-    private long customerId;
-
-    @Column(name = "car_id")
-    private long carId;
-
-    @Column(name = "date")
-    private Date date;
+    @Column(name = "timestamp")
+    private LocalDateTime timestamp;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cust_id")
@@ -39,39 +33,33 @@ public class Order {
     public Order() {
     }
 
-    public Order(long customerId, long carId) {
-        this.customerId = customerId;
-        this.carId = carId;
+    public Order(LocalDateTime timestamp, Customer customer, Car car) {
+        this.timestamp = timestamp;
+        this.customer = customer;
+        this.car = car;
     }
 
-    public long getId() {
-        return id;
+    public LocalDateTime getDate() {
+        return timestamp;
     }
 
-    public long getCustomerId() {
-        return customerId;
+    public void setDate(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 
-    public Order setCustomerId(long customerId) {
-        this.customerId = customerId;
-        return this;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public long getCarId() {
-        return carId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public Order setCarId(long carId) {
-        this.carId = carId;
-        return this;
+    public Car getCar() {
+        return car;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", customerId=" + customerId +
-                ", carId=" + carId +
-                '}';
+    public void setCar(Car car) {
+        this.car = car;
     }
 }

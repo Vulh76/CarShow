@@ -8,16 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "customers")
+@Table(name = "sbt.customers")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    long id;
+    private long id;
 
     @Column(name = "first_name", length = 100)
     private String firstName;
@@ -26,15 +27,15 @@ public class Customer {
     private String lastName;
 
     @Column(name = "birthday")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 
     public Customer() {
     }
 
-    public Customer(String firstName, String lastName, Date dateOfBirth) {
+    public Customer(String firstName, String lastName, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -62,11 +63,11 @@ public class Customer {
         return this;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public Customer setDateOfBirth(Date dateOfBirth) {
+    public Customer setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
         return this;
     }
@@ -80,6 +81,11 @@ public class Customer {
         return this;
     }
 
+    public void addOrder(Order order) {
+        order.setCustomer(this);
+        orders.add(order);
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -87,7 +93,6 @@ public class Customer {
                 ", firstName='" + firstName + '\'' +
                 ", LastName='" + lastName + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
-                ", orders=" + orders +
                 '}';
     }
 }

@@ -49,7 +49,7 @@ public class AppConfig {
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
-        factoryBean.setPackagesToScan("ru/sbt/company");
+        factoryBean.setPackagesToScan("ru/sbt/carshow");
         factoryBean.setHibernateProperties(getHibernateProperties());
         return factoryBean;
     }

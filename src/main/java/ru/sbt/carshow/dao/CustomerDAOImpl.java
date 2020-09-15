@@ -43,7 +43,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public void edit(Customer customer) {
+    public void update(Customer customer) {
         Session session = sessionFactory.getCurrentSession();
         session.update(customer);
     }

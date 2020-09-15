@@ -39,8 +39,8 @@ public class CarService {
     }
 
     @Transactional
-    public void edit(Car car) {
-        carDAO.edit(car);
+    public void update(Car car) {
+        carDAO.update(car);
     }
 
     @Transactional

@@ -39,8 +39,8 @@ public class CustomerService {
     }
 
     @Transactional
-    public void edit(Customer customer) {
-        customerDAO.edit(customer);
+    public void update(Customer customer) {
+        customerDAO.update(customer);
     }
 
     @Transactional

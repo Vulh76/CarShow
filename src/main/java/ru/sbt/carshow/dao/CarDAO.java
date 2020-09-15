@@ -10,7 +10,7 @@ public interface CarDAO {
     Car getById(long id);
     long add(Car car);
     void delete(Car car);
-    void edit(Car car);
+    void update(Car car);
     int count();
     int clear();
 }
