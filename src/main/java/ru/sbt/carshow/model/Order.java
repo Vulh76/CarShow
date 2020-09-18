@@ -22,21 +22,23 @@ public class Order {
     @Column(name = "timestamp")
     private LocalDateTime timestamp;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cust_id")
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id")
     private Car car;
 
     public Order() {
     }
 
-    public Order(LocalDateTime timestamp, Customer customer, Car car) {
-        this.timestamp = timestamp;
+    public Order(Customer customer, Car car) {
+        this.timestamp = LocalDateTime.now();
         this.customer = customer;
         this.car = car;
+        customer.addOrder(this);
+        car.addOrder(this);
     }
 
     public LocalDateTime getDate() {
@@ -61,5 +63,15 @@ public class Order {
 
     public void setCar(Car car) {
         this.car = car;
+    }
+
+    @Override
+    public String toString() {
+        return "\nOrder{" +
+                "id=" + id +
+                ", timestamp=" + timestamp +
+                ", customer=" + customer +
+                ", car=" + car +
+                '}';
     }
 }

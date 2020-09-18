@@ -9,7 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 @Entity
@@ -88,7 +90,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "\nCustomer{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", LastName='" + lastName + '\'' +

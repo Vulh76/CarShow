@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO {
+
     private final SessionFactory sessionFactory;
 
     @Autowired
