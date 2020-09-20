@@ -12,7 +12,6 @@ public class CustomerTest extends TestCase {
 
     @Test
     public void getId() {
-
     }
 
     @Test

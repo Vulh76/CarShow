@@ -9,7 +9,7 @@ import ru.sbt.carshow.model.Customer;
 import java.util.List;
 
 @Component
-public class DaoImpl<T> implements Dao<T> {
+public class DaoImpl implements Dao {
 
     private final SessionFactory sessionFactory;
 
@@ -20,43 +20,43 @@ public class DaoImpl<T> implements Dao<T> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<T> getAll() {
+    public <T> List<T> getAll(Class<T> cls) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Customer").list();
+        return session.createQuery("from " + cls.getSimpleName()).list();
     }
 
     @Override
-    public T getById(long id) {
+    public <T> T getById(Class<T> cls, long id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(Customer.class, id);
+        return session.get(cls, id);
     }
 
     @Override
-    public long add(T customer) {
+    public <T> long add(Class<T> cls, T customer) {
         Session session = sessionFactory.getCurrentSession();
         return (long) session.save(customer);
     }
 
     @Override
-    public void delete(T customer) {
+    public <T> void delete(Class<T> cls, T customer) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(customer);
     }
 
     @Override
-    public void update(T customer) {
+    public <T> void update(Class<T> cls, T customer) {
         Session session = sessionFactory.getCurrentSession();
         session.update(customer);
     }
 
     @Override
-    public int count() {
+    public <T> int count(Class<T> cls) {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("select cust.id from Customer cust").list().size();
     }
 
     @Override
-    public int clear() {
+    public <T> int clear(Class<T> cls) {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("delete from Customer").executeUpdate();
     }
