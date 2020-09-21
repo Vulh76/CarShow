@@ -5,9 +5,7 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.data.util.ReflectionUtils;
-import ru.sbt.carshow.dao.CarDAOImpl;
-import ru.sbt.carshow.dao.CustomerDAOImpl;
-import ru.sbt.carshow.dao.OrderDAOImpl;
+import ru.sbt.carshow.dao.EntityDAOImpl;
 import ru.sbt.carshow.model.Car;
 
 import java.lang.reflect.Field;
@@ -19,36 +17,34 @@ import static org.junit.Assert.*;
 
 public class CarShowServiceTest {
 
-    private OrderDAOImpl orderDAO;
-    private CustomerDAOImpl customerDAO;
-    private CarDAOImpl carDAO;
+    private EntityDAOImpl entityDAO;
     private CarShowService carShowService;
 
     @Before
-    public void setUp() throws Exception {
-        orderDAO = Mockito.mock(OrderDAOImpl.class);
-        customerDAO = Mockito.mock(CustomerDAOImpl.class);
-        carDAO = Mockito.mock(CarDAOImpl.class);
-        carShowService = new CarShowService(customerDAO, carDAO, orderDAO);
+    public void setUp() {
+        entityDAO = Mockito.mock(EntityDAOImpl.class);
+        carShowService = new CarShowService(entityDAO);
 
         HashMap<Long, Car> longCarHashMap = new HashMap<>();
         AtomicLong atomicLong = new AtomicLong();
 
-        Mockito.when(carDAO.add(Mockito.any())).thenAnswer(i -> {
+        Mockito.when(entityDAO.add(Mockito.any())).thenAnswer(i -> {
             long id = atomicLong.incrementAndGet();
             Car argument = i.getArgument(0, Car.class);
             Field field = argument.getClass().getDeclaredField("id");
             field.setAccessible(true);
             ReflectionUtils.setField(field, argument, id);
             longCarHashMap.put(id, argument);
-            return null;
+            return id;
         });
 
-        Mockito.when(carDAO.getById(Mockito.anyLong())).thenAnswer(i -> longCarHashMap.get(i.getArgument(0, Long.class)));
+        Mockito.when(entityDAO.getById(Mockito.any(), Mockito.anyLong())).thenAnswer(i ->
+                longCarHashMap.get(i.getArgument(1, Long.class))
+        );
     }
 
     @Test
-    public void testName() {
+    public void addCarTest1() {
         Car car = new Car();
         carShowService.addCar(car);
 
@@ -57,9 +53,9 @@ public class CarShowServiceTest {
     }
 
     @Test
-    public void testName2() {
+    public void addCarTest2() {
         ArgumentCaptor<Car> captor = ArgumentCaptor.forClass(Car.class);
-        Mockito.doReturn(1L).when(carDAO).add(captor.capture());
+        Mockito.doReturn(1L).when(entityDAO).add(captor.capture());
         //Mockito.when(carDAO.add(captor.capture())).thenReturn(1L);
 
         Car car = new Car();

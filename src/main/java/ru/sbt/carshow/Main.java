@@ -12,6 +12,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
         CarShowService carShowService = applicationContext.getBean(CarShowService.class);
 
@@ -80,7 +81,7 @@ public class Main {
         System.out.println(carShowService.getCar());
 
         System.out.println("Заказы:");
-        System.out.println(carShowService.getOrders());
+        System.out.println(carShowService.getOrder());
 
         long customerID = 2L;
         Customer customer = carShowService.getCustomer(customerID);

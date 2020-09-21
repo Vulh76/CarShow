@@ -15,7 +15,7 @@ import java.util.Deque;
 import java.util.List;
 
 @Entity
-@Table(name = "sbt.customers")
+@Table(name = "customers", schema = "sbt")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +45,10 @@ public class Customer {
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
