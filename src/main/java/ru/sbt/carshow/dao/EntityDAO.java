@@ -8,6 +8,6 @@ public interface EntityDAO {
     <T> long add(T entity);
     <T> void delete(T entity);
     <T> void update(T entity);
-    <T> int count(Class<T> clazz);
-    <T> int clear(Class<T> clazz);
+    <T> long count(Class<T> clazz);
+    <T> long clear(Class<T> clazz);
 }

@@ -103,6 +103,9 @@ public class Main {
             throw new IllegalArgumentException("Несуществующий carID: " + carID);
         }
 
+        long n = carShowService.countOrders();
+        //carShowService.clearOrders();
+
         System.out.println("=========================");
     }
 }

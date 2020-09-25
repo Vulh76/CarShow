@@ -21,7 +21,7 @@ public class EntityDAOImpl implements EntityDAO {
     @SuppressWarnings("unchecked")
     public <T> List<T> getAll(Class<T> clazz) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from " + clazz.getSimpleName()).list();
+        return session.createQuery("from " + clazz.getSimpleName()).getResultList();
     }
 
     @Override
@@ -49,13 +49,13 @@ public class EntityDAOImpl implements EntityDAO {
     }
 
     @Override
-    public <T> int count(Class<T> clazz) {
+    public <T> long count(Class<T> clazz) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("select entity.id from " + clazz.getSimpleName() + " entity").list().size();
+        return (long)session.createQuery("select count(entity.id) from " + clazz.getSimpleName() + " entity").getSingleResult();
     }
 
     @Override
-    public <T> int clear(Class<T> clazz) {
+    public <T> long clear(Class<T> clazz) {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("delete from " + clazz.getSimpleName()).executeUpdate();
     }

@@ -117,4 +117,14 @@ public class CarShowService {
     public List<Customer> getCarBuyers(Car car) {
         return car.getOrders().stream().map(Order::getCustomer).collect(Collectors.toList());
     }
+
+    @Transactional
+    public long clearOrders() {
+        return entityDAO.clear(Order.class);
+    }
+
+    @Transactional
+    public long countOrders() {
+        return entityDAO.count(Order.class);
+    }
 }

@@ -7,7 +7,7 @@ import org.junit.Test;
 public class CustomerTest extends TestCase {
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
     }
 
     @Test
@@ -16,9 +16,5 @@ public class CustomerTest extends TestCase {
 
     @Test
     public void getFirstName() {
-    }
-
-    @Test
-    public void setFirstName() {
     }
 }
