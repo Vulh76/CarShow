@@ -15,15 +15,15 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static org.junit.Assert.*;
 
-public class CarShowServiceTest {
+public class CarShowServiceImplTest {
 
     private EntityDAOImpl entityDAO;
-    private CarShowService carShowService;
+    private CarShowServiceImpl carShowService;
 
     @Before
     public void setUp() {
         entityDAO = Mockito.mock(EntityDAOImpl.class);
-        carShowService = new CarShowService(entityDAO);
+        carShowService = new CarShowServiceImpl(entityDAO);
 
         HashMap<Long, Car> longCarHashMap = new HashMap<>();
         AtomicLong atomicLong = new AtomicLong();

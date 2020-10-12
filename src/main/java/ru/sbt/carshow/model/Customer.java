@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -22,10 +25,14 @@ public class Customer {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "first_name", length = 100)
+    @Column(name = "first_name", length = 50)
+    @Size(min = 1, max = 50)
+    @NotNull
     private String firstName;
 
-    @Column(name = "last_name", length = 100)
+    @Column(name = "last_name", length = 50)
+    @Size(min = 1, max = 50)
+    @NotNull
     private String lastName;
 
     @Column(name = "birthday")
@@ -87,14 +94,15 @@ public class Customer {
         return this;
     }
 
-    public void addOrder(Order order) {
+    public Customer addOrder(Order order) {
         order.setCustomer(this);
         orders.add(order);
+        return this;
     }
 
     @Override
     public String toString() {
-        return "\nCustomer{" +
+        return "Customer{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", LastName='" + lastName + '\'' +

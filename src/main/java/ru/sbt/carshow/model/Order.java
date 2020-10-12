@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,14 +21,17 @@ public class Order {
     private long id;
 
     @Column(name = "timestamp")
+    @NotNull
     private LocalDateTime timestamp;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cust_id")
+    @NotNull
     private Customer customer;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id")
+    @NotNull
     private Car car;
 
     public Order() {
@@ -75,7 +79,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "\nOrder{" +
+        return "Order{" +
                 "id=" + id +
                 ", timestamp=" + timestamp +
                 ", customer=" + customer +

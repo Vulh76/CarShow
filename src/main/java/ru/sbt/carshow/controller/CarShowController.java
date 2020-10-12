@@ -5,29 +5,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.sbt.carshow.model.Car;
 import ru.sbt.carshow.model.Customer;
-import ru.sbt.carshow.service.CarShowService;
+import ru.sbt.carshow.service.CarShowServiceImpl;
 
 import java.util.List;
 
-//@RestController
+@RestController
+@RequestMapping("/carshow")
 public class CarShowController {
-    private final CarShowService carShowService;
+    private final CarShowServiceImpl carShowService;
+    private int itemPerPage = 10;
+
 
     @Autowired
-    public CarShowController(CarShowService carShowService) {
+    public CarShowController(CarShowServiceImpl carShowService) {
         this.carShowService = carShowService;
     }
 
     @GetMapping("/customers")
-    public List<Customer> getCustomers() {
+    public List<Customer> getCustomer() {
         return carShowService.getCustomers();
     }
 
     @GetMapping("/customer/{customerId}")
-    public Customer getCustomers(@PathVariable long customerId) {
+    public Customer getCustomer(@PathVariable long customerId) {
         return carShowService.getCustomer(customerId);
     }
 
@@ -41,5 +45,4 @@ public class CarShowController {
         carShowService.addCustomer(customer);
         return customer;
     }
-
 }

@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +22,22 @@ public class Car {
     @Column(name = "id")
     long id;
 
-    @Column(name = "brand")
+    @Column(name = "brand", length = 50)
+    @Size(min = 2, max = 50)
+    @NotNull
     String brand;
 
-    @Column(name = "model")
+    @Column(name = "model", length = 50)
+    @Size(min = 2, max = 50)
+    @NotNull
     String model;
 
     @Column(name = "color")
+    @Size(min = 2, max = 50)
     String color;
 
     @Column(name = "cost")
+    @Min(1)
     int cost;
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -97,14 +106,15 @@ public class Car {
         return this;
     }
 
-    public void addOrder(Order order) {
+    public Car addOrder(Order order) {
         order.setCar(this);
         orders.add(order);
+        return this;
     }
 
     @Override
     public String toString() {
-        return "\nCar{" +
+        return "Car{" +
                 "id=" + id +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +

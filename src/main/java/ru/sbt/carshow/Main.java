@@ -5,7 +5,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import ru.sbt.carshow.config.AppConfig;
 import ru.sbt.carshow.model.Car;
 import ru.sbt.carshow.model.Customer;
-import ru.sbt.carshow.service.CarShowService;
+import ru.sbt.carshow.service.CarShowServiceImpl;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
 
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        CarShowService carShowService = applicationContext.getBean(CarShowService.class);
+        CarShowServiceImpl carShowService = applicationContext.getBean(CarShowServiceImpl.class);
 
         carShowService.addCar(new Car("Mercedes", "35 AMG 4MATIC", "Black", 3500000));
         carShowService.addCar(new Car("Mercedes", "4MATIC OS", "Black", 4550000));
